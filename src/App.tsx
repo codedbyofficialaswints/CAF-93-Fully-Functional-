@@ -12,6 +12,7 @@ import AboutPage from './components/AboutPage';
 import SpacePage from './components/SpacePage';
 import GiftingPage from './components/GiftingPage';
 import ContactPage from './components/ContactPage';
+import ReservationsPage from './components/ReservationsPage';
 import CartDrawer from './components/CartDrawer';
 
 export default function App() {
@@ -106,6 +107,86 @@ export default function App() {
               addedItemIds={cartItems.map(c => c.item.id)}
             />
             <Ambience 
+              currentLang={currentLang} 
+            />
+            <Locations 
+              currentLang={currentLang} 
+            />
+          </div>
+        )}
+
+        {activeTab === 'menu' && (
+          <div className="animate-fade-in">
+            <MenuPage 
+              currentLang={currentLang}
+              onAddToOrder={handleAddToOrder}
+              addedItemIds={cartItems.map(c => c.item.id)}
+            />
+          </div>
+        )}
+
+        {activeTab === 'about' && (
+          <div className="animate-fade-in">
+            <AboutPage 
+              currentLang={currentLang}
+            />
+          </div>
+        )}
+
+        {activeTab === 'space' && (
+          <div className="animate-fade-in">
+            <SpacePage 
+              currentLang={currentLang}
+            />
+          </div>
+        )}
+
+        {activeTab === 'gifting' && (
+          <div className="animate-fade-in">
+            <GiftingPage 
+              currentLang={currentLang}
+              onAddToCart={handleAddToOrder}
+            />
+          </div>
+        )}
+
+        {activeTab === 'reserve' && (
+          <div className="animate-fade-in">
+            <ReservationsPage
+              currentLang={currentLang}
+            />
+          </div>
+        )}
+
+        {activeTab === 'contact' && (
+          <div className="animate-fade-in">
+            <ContactPage 
+              currentLang={currentLang}
+            />
+          </div>
+        )}
+      </main>
+
+      {/* 3. Global Premium Footer */}
+      <Footer 
+        currentLang={currentLang} 
+        onNavigate={setActiveTab}
+      />
+
+      {/* 4. Slide-in checkout cart Drawer overlay */}
+      <CartDrawer 
+        currentLang={currentLang}
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        cartItems={cartItems}
+        onUpdateQuantity={handleUpdateQuantity}
+        onRemoveItem={handleRemoveItem}
+        onClearCart={handleClearCart}
+      />
+
+    </div>
+  );
+}            <Ambience 
               currentLang={currentLang} 
             />
             <Locations 
