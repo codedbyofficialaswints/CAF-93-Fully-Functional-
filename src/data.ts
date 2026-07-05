@@ -10,7 +10,34 @@ export const TRANSLATIONS: TranslationSet = {
   navSpace: { en: "Space & Drive-thru", ar: "المساحة والدرايف ثرو" },
   navGifting: { en: "Gifting", ar: "الإهداء" },
   navContact: { en: "Contact", ar: "اتصل بنا" },
+  navReserve: { en: "Reserve a Table", ar: "احجز طاولة" },
   btnOrderNow: { en: "Order Now", ar: "اطلب الآن" },
+
+  // Reservations Page
+  reservationsTitle: { en: "Reserve Your Table", ar: "احجز طاولتك" },
+  reservationsSubtitle: {
+    en: "Secure your spot in the lounge, the workspace corner, or under the open sky — in seconds.",
+    ar: "احجز مكانك في الصالة، ركن العمل، أو الجلسة الخارجية في ثوانٍ معدودة."
+  },
+  reservationsFormHeader: { en: "Booking Details", ar: "تفاصيل الحجز" },
+  formReserveDate: { en: "Select Date", ar: "اختر التاريخ" },
+  formReserveTime: { en: "Select Time", ar: "اختر الوقت" },
+  formPartySize: { en: "Party Size", ar: "عدد الأشخاص" },
+  formSeating: { en: "Seating Preference", ar: "تفضيل الجلسة" },
+  seatLounge: { en: "Lounge", ar: "الصالة" },
+  seatWorkspace: { en: "Workspace Corner", ar: "ركن العمل" },
+  seatOutdoor: { en: "Outdoor", ar: "خارجية" },
+  formOccasion: { en: "Occasion", ar: "المناسبة" },
+  occasionNone: { en: "Just Visiting", ar: "زيارة عادية" },
+  occasionBirthday: { en: "Birthday", ar: "عيد ميلاد" },
+  occasionMeeting: { en: "Business Meeting", ar: "اجتماع عمل" },
+  occasionAnniversary: { en: "Anniversary", ar: "ذكرى سنوية" },
+  btnConfirmReservation: { en: "Confirm Reservation", ar: "تأكيد الحجز" },
+  reservationSuccess: { en: "Table Reserved!", ar: "تم حجز طاولتك!" },
+  reservationSuccessSub: {
+    en: "We've saved your table. Show your reference code at the host stand when you arrive.",
+    ar: "تم حجز طاولتك بنجاح. يرجى إظهار رقم الحجز عند وصولك."
+  },
 
   // Hero Section
   heroTitle: { en: "The Elixir of Happiness", ar: "إكسير السعادة" },
