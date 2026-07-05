@@ -30,6 +30,7 @@ export default function Navbar({
     { id: 'about', label: t('navStory') },
     { id: 'space', label: t('navSpace') },
     { id: 'gifting', label: t('navGifting') },
+    { id: 'reserve', label: t('navReserve') },
     { id: 'contact', label: t('navContact') }
   ];
 
@@ -112,6 +113,14 @@ export default function Navbar({
                   {cartCount}
                 </span>
               )}
+            </button>
+
+            {/* Reserve a Table Call to Action */}
+            <button
+              onClick={() => handleNavClick('reserve')}
+              className="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-gold hover:text-white border border-gold/40 hover:border-gold rounded-md transition-luxury cursor-pointer"
+            >
+              {t('navReserve')}
             </button>
 
             {/* Order Now Call to Action */}
