@@ -1,0 +1,6 @@
+{
+  "name": "CAFÉ 93°",
+  "description": "Premium specialty coffee house and refined workspace café in Barka, Oman — Oman's first drive-thru café concept fused with a boutique lounge interior.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

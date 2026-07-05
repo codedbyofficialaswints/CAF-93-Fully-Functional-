@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+@theme {
+  --color-wine: #7A1F1F;
+  --color-dark-red: #4A1010;
+  --color-terracotta: #B5502E;
+  --color-gold: #C9A15A;
+  --color-cream: #EDE1CB;
+  --color-walnut: #6B4226;
+  --color-espresso: #1A1210;
+  --color-ivory: #FBF4E8;
+
+  --font-sans: "Posterama Semibold", "Posterama", "Outfit", "Inter", sans-serif;
+  --font-serif: "Posterama Semibold", "Posterama", "Outfit", "Fraunces", serif;
+  --font-posterama-regular: "Posterama", "Outfit", "Inter", sans-serif;
+  --font-arabic-display: "Noto Kufi Arabic", "Cairo", sans-serif;
+  --font-arabic-body: "Cairo", "Tajawal", sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-slow-spin: slow-spin 20s linear infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-grain: grain 8s steps(10) infinite;
+  --animate-stream: stream 15s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+  @keyframes slow-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.5; }
+  }
+  @keyframes grain {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-1%, -1%); }
+    20% { transform: translate(-2%, 1%); }
+    30% { transform: translate(1%, -2%); }
+    40% { transform: translate(-1%, 3%); }
+    50% { transform: translate(-2%, 1%); }
+    60% { transform: translate(3%, -1%); }
+    70% { transform: translate(2%, 1%); }
+    80% { transform: translate(-1%, -2%); }
+    90% { transform: translate(1%, 3%); }
+  }
+  @keyframes stream {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+}
+
+/* Custom Base Classes */
+@layer base {
+  body {
+    background-color: var(--color-dark-red);
+    color: var(--color-ivory);
+    font-family: var(--font-sans);
+  }
+  
+  [dir="rtl"] body {
+    font-family: var(--font-arabic-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+  }
+
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
+    font-family: var(--font-arabic-display);
+  }
+}
+
+/* Islamic / Omani Geometric Diamond Lattice Background */
+.bg-lattice {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z M30 10 L50 30 L30 50 L10 30 Z' fill='none' stroke='%23C9A15A' stroke-width='0.4' stroke-opacity='0.08'/%3E%3Ccircle cx='30' cy='30' r='1.5' fill='%23C9A15A' fill-opacity='0.1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Noise Grain Overlay for Tactility */
+.bg-grain {
+  position: relative;
+}
+
+.bg-grain::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 1;
+}
+
+/* Asymmetric Ceramic Rounded Corners (Stoneware Feel) */
+.ceramic-card {
+  border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+  background: var(--color-cream);
+  color: var(--color-espresso);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.ceramic-card-alt {
+  border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
+  background: var(--color-ivory);
+  color: var(--color-espresso);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.gold-border {
+  border: 1px solid var(--color-gold);
+}
+
+.font-display {
+  font-family: "Posterama Semibold", "Posterama", "Outfit", sans-serif;
+}
+
+.font-posterama-regular {
+  font-family: var(--font-posterama-regular);
+  font-weight: 300;
+  font-style: normal;
+}
+
+.arabic {
+  font-family: 'Times New Roman', 'Cairo', serif;
+  font-weight: 700;
+}
+
+.bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: conic-gradient(from 0deg at 50% 50%, transparent 0deg 90deg, rgba(201, 161, 90, 0.05) 90deg 180deg, transparent 180deg 270deg, rgba(201, 161, 90, 0.05) 270deg 360deg);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-pattern-tile {
+  background-image: conic-gradient(from 0deg at 50% 50%, transparent 0deg 90deg, rgba(201, 161, 90, 0.04) 90deg 180deg, transparent 180deg 270deg, rgba(201, 161, 90, 0.04) 270deg 360deg);
+  background-size: 60px 60px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-red);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-wine);
+  border: 2px solid var(--color-dark-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* Glassmorphism */
+.glass-nav {
+  background: rgba(74, 16, 16, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201, 161, 90, 0.15);
+}
+
+.glass-card {
+  background: rgba(122, 31, 31, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(201, 161, 90, 0.1);
+}
+
+/* Smooth Interactive Elements */
+.transition-luxury {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* RTL layout helpers */
+.rtl-mirror {
+  transform: scaleX(-1);
+}
+
+/* Ceramic Ripple pour effect */
+.coffee-fill {
+  background: linear-gradient(to top, #4A1010 0%, #7A1F1F 50%, #B5502E 100%);
+  background-size: 100% 200%;
+}
+
+/* Custom styles for map dark theme mockup */
+.map-dark-overlay {
+  filter: grayscale(1) contrast(1.2) invert(0.9) sepia(0.6) hue-rotate(330deg) saturate(1.4);
+}
