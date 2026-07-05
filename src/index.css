@@ -21,7 +21,18 @@
   --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
   --animate-grain: grain 8s steps(10) infinite;
   --animate-stream: stream 15s linear infinite;
+  --animate-fade-in: fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   @keyframes float {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
     50% { transform: translateY(-10px) rotate(2deg); }
@@ -54,10 +65,18 @@
 
 /* Custom Base Classes */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+  
   body {
     background-color: var(--color-dark-red);
     color: var(--color-ivory);
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
   
   [dir="rtl"] body {

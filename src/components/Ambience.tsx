@@ -221,6 +221,9 @@ export default function Ambience({ currentLang }: AmbienceProps) {
                     src={currentSpot.image} 
                     alt={currentSpot.title[currentLang]} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-dark-red/20 mix-blend-multiply" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1a1210] to-transparent" />

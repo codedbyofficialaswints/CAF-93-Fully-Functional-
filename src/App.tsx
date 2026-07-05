@@ -98,6 +98,11 @@ export default function App() {
     }
   }, [currentLang]);
 
+  // Scroll to top on page/tab navigation
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [activeTab]);
+
   // Handle adding items to order list
   const handleAddToOrder = (item: MenuItem) => {
     setCartItems((prevItems) => {
@@ -174,80 +179,66 @@ export default function App() {
 
       {/* 2. Main content switch-router */}
       <main className="flex-grow">
-        {activeTab === 'home' && (
-          <div className="animate-fade-in">
-            <Hero 
-              currentLang={currentLang} 
-              onNavigate={setActiveTab} 
-            />
-            <Storytelling 
-              currentLang={currentLang} 
-            />
-            <MenuTeaser 
-              currentLang={currentLang} 
-              onNavigate={setActiveTab} 
-              onAddToOrder={handleAddToOrder}
-              addedItemIds={cartItems.map(c => c.item.id)}
-            />
-            <Ambience 
-              currentLang={currentLang} 
-            />
-            <Locations 
-              currentLang={currentLang} 
-            />
-          </div>
-        )}
+        <div className={activeTab === 'home' ? 'block animate-fade-in' : 'hidden'}>
+          <Hero 
+            currentLang={currentLang} 
+            onNavigate={setActiveTab} 
+          />
+          <Storytelling 
+            currentLang={currentLang} 
+          />
+          <MenuTeaser 
+            currentLang={currentLang} 
+            onNavigate={setActiveTab} 
+            onAddToOrder={handleAddToOrder}
+            addedItemIds={cartItems.map(c => c.item.id)}
+          />
+          <Ambience 
+            currentLang={currentLang} 
+          />
+          <Locations 
+            currentLang={currentLang} 
+          />
+        </div>
 
-        {activeTab === 'menu' && (
-          <div className="animate-fade-in">
-            <MenuPage 
-              currentLang={currentLang}
-              onAddToOrder={handleAddToOrder}
-              addedItemIds={cartItems.map(c => c.item.id)}
-            />
-          </div>
-        )}
+        <div className={activeTab === 'menu' ? 'block animate-fade-in' : 'hidden'}>
+          <MenuPage 
+            currentLang={currentLang}
+            onAddToOrder={handleAddToOrder}
+            addedItemIds={cartItems.map(c => c.item.id)}
+          />
+        </div>
 
-        {activeTab === 'about' && (
-          <div className="animate-fade-in">
-            <AboutPage 
-              currentLang={currentLang}
-            />
-          </div>
-        )}
+        <div className={activeTab === 'about' ? 'block animate-fade-in' : 'hidden'}>
+          <AboutPage 
+            currentLang={currentLang}
+          />
+        </div>
 
-        {activeTab === 'space' && (
-          <div className="animate-fade-in">
-            <SpacePage 
-              currentLang={currentLang}
-            />
-          </div>
-        )}
+        <div className={activeTab === 'space' ? 'block animate-fade-in' : 'hidden'}>
+          <SpacePage 
+            currentLang={currentLang}
+          />
+        </div>
 
-        {activeTab === 'gifting' && (
-          <div className="animate-fade-in">
-            <GiftingPage 
-              currentLang={currentLang}
-              onAddToCart={handleAddToOrder}
-            />
-          </div>
-        )}
+        <div className={activeTab === 'gifting' ? 'block animate-fade-in' : 'hidden'}>
+          <GiftingPage 
+            currentLang={currentLang}
+            onAddToCart={handleAddToOrder}
+          />
+        </div>
 
-        {activeTab === 'contact' && (
-          <div className="animate-fade-in">
-            <ContactPage 
-              currentLang={currentLang}
-            />
-          </div>
-        )}
+        <div className={activeTab === 'contact' ? 'block animate-fade-in' : 'hidden'}>
+          <ContactPage 
+            currentLang={currentLang}
+          />
+        </div>
 
-        {activeTab === 'reservations' && (
-          <div className="animate-fade-in">
-            <ReservationPage 
-              currentLang={currentLang}
-            />
-          </div>
-        )}
+        <div className={activeTab === 'reservations' ? 'block animate-fade-in' : 'hidden'}>
+          <ReservationPage 
+            currentLang={currentLang}
+          />
+        </div>
       </main>
 
       {/* 3. Global Premium Footer */}

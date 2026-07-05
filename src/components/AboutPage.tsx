@@ -57,6 +57,9 @@ export default function AboutPage({ currentLang }: AboutPageProps) {
               src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" 
               alt="Barista brewing latte art, CAFÉ93 stoneware cup" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-dark-red/20 mix-blend-multiply" />
             <div className="absolute inset-0 bg-wine/15 mix-blend-color" />
@@ -108,6 +111,8 @@ export default function AboutPage({ currentLang }: AboutPageProps) {
               src="/src/assets/images/branding_mockup_1783203298263.jpg" 
               alt="Café 93 Brand Identity Mockup" 
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark-red/50 via-transparent to-transparent pointer-events-none" />
@@ -121,6 +126,9 @@ export default function AboutPage({ currentLang }: AboutPageProps) {
               src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=80&w=800" 
               alt="Artisanal raw coffee beans sourcing" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-dark-red/25 mix-blend-multiply" />
             <div className="absolute bottom-6 left-6 right-6 bg-dark-red/90 border border-gold/20 p-4 rounded-lg">

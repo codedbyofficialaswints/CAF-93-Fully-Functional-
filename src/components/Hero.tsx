@@ -12,9 +12,9 @@ interface HeroProps {
 export default function Hero({ currentLang, onNavigate }: HeroProps) {
   const [isPouring, setIsPouring] = useState(false);
   const [pourCompleted, setPourCompleted] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [audioMuted, setAudioMuted] = useState(true);
   const heroRef = useRef<HTMLDivElement>(null);
+  const tiltRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const t = (key: string) => TRANSLATIONS[key]?.[currentLang] || key;
@@ -22,21 +22,32 @@ export default function Hero({ currentLang, onNavigate }: HeroProps) {
   // Track mouse position for the 3D parallax tilt effect on desktop
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!heroRef.current) return;
+      if (!heroRef.current || !tiltRef.current) return;
       const rect = heroRef.current.getBoundingClientRect();
       // Calculate normalized coords between -1 and 1
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-      setMousePos({ x, y });
+      
+      const rotX = y * -15; // Max 15 deg tilt
+      const rotY = x * 15;
+      
+      tiltRef.current.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    };
+
+    const handleMouseLeave = () => {
+      if (!tiltRef.current) return;
+      tiltRef.current.style.transform = 'rotateX(0deg) rotateY(0deg)';
     };
 
     const element = heroRef.current;
     if (element) {
-      element.addEventListener('mousemove', handleMouseMove);
+      element.addEventListener('mousemove', handleMouseMove, { passive: true });
+      element.addEventListener('mouseleave', handleMouseLeave, { passive: true });
     }
     return () => {
       if (element) {
         element.removeEventListener('mousemove', handleMouseMove);
+        element.removeEventListener('mouseleave', handleMouseLeave);
       }
     };
   }, []);
@@ -57,10 +68,6 @@ export default function Hero({ currentLang, onNavigate }: HeroProps) {
       setPourCompleted(true);
     }, 3500);
   };
-
-  // Calculate fine tilt values
-  const rotateX = mousePos.y * -15; // Max 15 deg tilt
-  const rotateY = mousePos.x * 15;
 
   return (
     <div 
@@ -161,9 +168,10 @@ export default function Hero({ currentLang, onNavigate }: HeroProps) {
               }}
             >
               <div 
+                ref={tiltRef}
                 className="relative w-full h-full flex justify-center items-center transition-all duration-300 ease-out"
                 style={{
-                  transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+                  transform: 'rotateX(0deg) rotateY(0deg)',
                   transformStyle: 'preserve-3d'
                 }}
               >

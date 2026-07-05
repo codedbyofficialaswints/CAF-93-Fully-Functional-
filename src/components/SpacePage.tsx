@@ -123,6 +123,8 @@ export default function SpacePage({ currentLang }: SpacePageProps) {
                   alt={img.caption[currentLang]} 
                   className="w-full object-cover rounded-2xl group-hover:scale-103 transition-transform duration-500"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
                 
                 {/* Overlay hover element */}
@@ -155,6 +157,7 @@ export default function SpacePage({ currentLang }: SpacePageProps) {
               src={lightboxImg} 
               alt="Bespoke luxury interior" 
               className="max-w-full max-h-[85vh] rounded-xl border border-gold/30 object-contain shadow-2xl"
+              decoding="async"
             />
           </div>
         )}
