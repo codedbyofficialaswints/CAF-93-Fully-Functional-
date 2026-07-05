@@ -14,12 +14,75 @@ import GiftingPage from './components/GiftingPage';
 import ContactPage from './components/ContactPage';
 import ReservationPage from './components/ReservationPage';
 import CartDrawer from './components/CartDrawer';
+import AdminDashboard from './components/AdminDashboard';
+import { supabase } from './lib/supabase';
+import { TRANSLATIONS } from './data';
 
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('en');
-  const [activeTab, setActiveTab] = useState<string>('home');
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    if (
+      window.location.pathname === '/admin' || 
+      window.location.hash === '#/admin' || 
+      window.location.search.includes('admin=true')
+    ) {
+      return 'admin';
+    }
+    return 'home';
+  });
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  // Sync URL changes for back-office admin
+  useEffect(() => {
+    const handleUrlChange = () => {
+      if (
+        window.location.pathname === '/admin' || 
+        window.location.hash === '#/admin' || 
+        window.location.search.includes('admin=true')
+      ) {
+        setActiveTab('admin');
+      }
+    };
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('hashchange', handleUrlChange);
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+      window.removeEventListener('hashchange', handleUrlChange);
+    };
+  }, []);
+
+  // Fetch dynamic hours from Supabase settings table if configured
+  useEffect(() => {
+    async function fetchLiveHours() {
+      try {
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+        const isPlaceholder = !supabaseUrl || supabaseUrl.includes('your_supabase_project_url_here');
+        if (isPlaceholder) return;
+
+        const { data, error } = await supabase.from('settings').select('*');
+        if (data && !error) {
+          data.forEach((row: any) => {
+            if (row.key === 'hoursWeekdays') {
+              TRANSLATIONS.hoursWeekdays = {
+                en: row.value_en || TRANSLATIONS.hoursWeekdays.en,
+                ar: row.value_ar || TRANSLATIONS.hoursWeekdays.ar
+              };
+            }
+            if (row.key === 'hoursWeekend') {
+              TRANSLATIONS.hoursWeekend = {
+                en: row.value_en || TRANSLATIONS.hoursWeekend.en,
+                ar: row.value_ar || TRANSLATIONS.hoursWeekend.ar
+              };
+            }
+          });
+        }
+      } catch (err) {
+        console.warn('Error fetching dynamic timings, using fallback:', err);
+      }
+    }
+    fetchLiveHours();
+  }, []);
 
   // Sync RTL / HTML attributes when language changes
   useEffect(() => {
@@ -74,6 +137,26 @@ export default function App() {
   };
 
   const cartTotalCount = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
+
+  if (activeTab === 'admin') {
+    return (
+      <div className="min-h-screen bg-[#1c0505]">
+        <AdminDashboard 
+          currentLang={currentLang} 
+          onBackToSite={() => {
+            if (window.location.pathname === '/admin') {
+              window.history.replaceState({}, '', '/');
+            } else if (window.location.hash === '#/admin') {
+              window.location.hash = '';
+            } else if (window.location.search.includes('admin=true')) {
+              window.history.replaceState({}, '', '/');
+            }
+            setActiveTab('home');
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen text-cream bg-gradient-to-b from-[#7A1F1F] to-[#4A1010] flex flex-col justify-between selection:bg-gold selection:text-espresso font-sans relative overflow-hidden">
