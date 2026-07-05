@@ -69,7 +69,7 @@ export default function ReservationPage({ currentLang }: ReservationPageProps) {
         notes: ''
       });
     } catch (err: any) {
-      console.error('Error creating reservation:', err);
+      console.warn('Error creating reservation:', err);
       setError(
         currentLang === 'en'
           ? `Could not submit reservation: ${err.message || 'Network error'}`

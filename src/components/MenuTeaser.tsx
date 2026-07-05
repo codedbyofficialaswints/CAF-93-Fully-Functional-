@@ -78,7 +78,7 @@ export default function MenuTeaser({
           setSignatures(fallback);
         }
       } catch (err: any) {
-        console.error('Error fetching teaser products, falling back to local signatures:', err);
+        console.warn('Error fetching teaser products, falling back to local signatures:', err);
         const fallback = MENU_ITEMS.filter(item => ["m-1", "m-5", "m-8"].includes(item.id));
         setSignatures(fallback);
       } finally {

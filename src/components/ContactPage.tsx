@@ -73,7 +73,7 @@ export default function ContactPage({ currentLang }: ContactPageProps) {
         setFormSubmitted(false);
       }, 5000);
     } catch (err: any) {
-      console.error('Error submitting contact message:', err);
+      console.warn('Error submitting contact message:', err);
       setError(
         currentLang === 'en'
           ? `Could not transmit message: ${err.message || 'Network error'}`

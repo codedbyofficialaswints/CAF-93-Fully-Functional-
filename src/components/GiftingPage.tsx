@@ -123,7 +123,7 @@ export default function GiftingPage({ currentLang, onAddToCart }: GiftingPagePro
         setInquirySubmitted(false);
       }, 5000);
     } catch (err: any) {
-      console.error('Error submitting corporate inquiry:', err);
+      console.warn('Error submitting corporate inquiry:', err);
       setCorporateError(
         currentLang === 'en'
           ? `Could not submit inquiry: ${err.message || 'Network error'}`

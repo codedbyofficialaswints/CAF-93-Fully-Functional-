@@ -86,7 +86,7 @@ export default function MenuPage({
           setMenuItems(MENU_ITEMS);
         }
       } catch (err: any) {
-        console.error('Error fetching products, falling back to local MENU_ITEMS:', err);
+        console.warn('Error fetching products, falling back to local MENU_ITEMS:', err);
         setMenuItems(MENU_ITEMS);
       } finally {
         setLoading(false);
