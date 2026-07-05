@@ -10,6 +10,7 @@ export const TRANSLATIONS: TranslationSet = {
   navSpace: { en: "Space & Drive-thru", ar: "المساحة والدرايف ثرو" },
   navGifting: { en: "Gifting", ar: "الإهداء" },
   navContact: { en: "Contact", ar: "اتصل بنا" },
+  navReservations: { en: "Reservations", ar: "الحجوزات" },
   btnOrderNow: { en: "Order Now", ar: "اطلب الآن" },
 
   // Hero Section

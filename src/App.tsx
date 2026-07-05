@@ -12,6 +12,7 @@ import AboutPage from './components/AboutPage';
 import SpacePage from './components/SpacePage';
 import GiftingPage from './components/GiftingPage';
 import ContactPage from './components/ContactPage';
+import ReservationPage from './components/ReservationPage';
 import CartDrawer from './components/CartDrawer';
 
 export default function App() {
@@ -152,6 +153,14 @@ export default function App() {
         {activeTab === 'contact' && (
           <div className="animate-fade-in">
             <ContactPage 
+              currentLang={currentLang}
+            />
+          </div>
+        )}
+
+        {activeTab === 'reservations' && (
+          <div className="animate-fade-in">
+            <ReservationPage 
               currentLang={currentLang}
             />
           </div>

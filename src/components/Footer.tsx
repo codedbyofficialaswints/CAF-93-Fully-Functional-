@@ -166,8 +166,14 @@ export default function Footer({ currentLang, onNavigate }: FooterProps) {
               <button onClick={() => onNavigate('space')} className="text-left rtl:text-right hover:text-gold transition-colors text-cream/70 cursor-pointer">
                 {t('navSpace')}
               </button>
+              <button onClick={() => onNavigate('reservations')} className="text-left rtl:text-right hover:text-gold transition-colors text-cream/70 cursor-pointer">
+                {t('navReservations')}
+              </button>
               <button onClick={() => onNavigate('gifting')} className="text-left rtl:text-right hover:text-gold transition-colors text-cream/70 cursor-pointer">
                 {t('navGifting')}
+              </button>
+              <button onClick={() => onNavigate('contact')} className="text-left rtl:text-right hover:text-gold transition-colors text-cream/70 cursor-pointer">
+                {t('navContact')}
               </button>
             </div>
           </div>

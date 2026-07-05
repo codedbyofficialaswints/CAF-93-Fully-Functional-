@@ -29,6 +29,7 @@ export default function Navbar({
     { id: 'menu', label: t('navMenu') },
     { id: 'about', label: t('navStory') },
     { id: 'space', label: t('navSpace') },
+    { id: 'reservations', label: t('navReservations') },
     { id: 'gifting', label: t('navGifting') },
     { id: 'contact', label: t('navContact') }
   ];

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, SlidersHorizontal, Check, Plus, Coffee, Sparkles, Filter } from 'lucide-react';
+import { Search, SlidersHorizontal, Check, Plus, Coffee, Sparkles, Filter, AlertCircle, Loader } from 'lucide-react';
 import { Language, MenuItem } from '../types';
 import { TRANSLATIONS, MENU_ITEMS } from '../data';
+import { supabase } from '../lib/supabase';
+
 
 interface MenuPageProps {
   currentLang: Language;
@@ -18,6 +20,10 @@ export default function MenuPage({
   const [activeCategory, setActiveCategory] = useState<'all' | 'hot' | 'cold' | 'desserts' | 'gifting'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [dietaryFilter, setDietaryFilter] = useState<string | null>(null);
+  
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const t = (key: string) => TRANSLATIONS[key]?.[currentLang] || key;
 
@@ -30,8 +36,68 @@ export default function MenuPage({
     { id: 'gifting', label: currentLang === 'en' ? 'Gifting' : 'الإهداء الفاخر' }
   ];
 
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+        const isPlaceholder = !supabaseUrl || supabaseUrl.includes('your_supabase_project_url_here');
+
+        if (isPlaceholder) {
+          console.warn('Supabase not configured. Falling back to local MENU_ITEMS.');
+          setMenuItems(MENU_ITEMS);
+          return;
+        }
+
+        const { data, error: fetchErr } = await supabase
+          .from('products')
+          .select('*')
+          .eq('in_stock', true);
+
+        if (fetchErr) {
+          throw fetchErr;
+        }
+
+        if (data && data.length > 0) {
+          const mapped: MenuItem[] = data.map((item: any) => ({
+            id: item.id,
+            name: {
+              en: item.name_en || '',
+              ar: item.name_ar || ''
+            },
+            description: {
+              en: item.description_en || '',
+              ar: item.description_ar || ''
+            },
+            poeticDesc: {
+              en: item.description_en || '',
+              ar: item.description_ar || ''
+            },
+            price: Number(item.price),
+            category: item.category,
+            image: item.image_url || '',
+            dietary: item.id === 'm-1' ? ['gluten-free'] : (item.id === 'm-6' ? ['vegan', 'gluten-free'] : [])
+          }));
+          setMenuItems(mapped);
+        } else {
+          console.warn('No products found in database. Falling back to local MENU_ITEMS.');
+          setMenuItems(MENU_ITEMS);
+        }
+      } catch (err: any) {
+        console.error('Error fetching products, falling back to local MENU_ITEMS:', err);
+        setMenuItems(MENU_ITEMS);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProducts();
+  }, [currentLang]);
+
   // Filter items
-  const filteredItems = MENU_ITEMS.filter((item) => {
+  const filteredItems = menuItems.filter((item) => {
     const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
     
     const matchesSearch = 
@@ -118,10 +184,40 @@ export default function MenuPage({
 
         </div>
 
-        {/* Dynamic Menu Grid */}
+        {/* Dynamic Menu Grid / Loading / Error */}
         <AnimatePresence mode="wait">
-          {filteredItems.length === 0 ? (
+          {loading ? (
             <motion.div
+              key="loading"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-center py-20 bg-wine/10 border border-gold/10 rounded-2xl flex flex-col items-center justify-center space-y-4"
+            >
+              <Loader className="w-10 h-10 text-gold animate-spin" />
+              <p className="text-cream/80 font-mono text-sm">
+                {currentLang === 'en' ? "Consulting the ritual parameters..." : "جاري استخلاص بيانات القائمة الفاخرة..."}
+              </p>
+            </motion.div>
+          ) : error ? (
+            <motion.div
+              key="error"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-center py-16 bg-wine/20 border border-red-500/20 rounded-2xl max-w-xl mx-auto space-y-4 p-6"
+            >
+              <AlertCircle className="w-12 h-12 text-red-500 mx-auto animate-pulse" />
+              <p className="text-white font-serif text-lg font-bold">
+                {currentLang === 'en' ? "Ritual Connection Interrupted" : "انقطع طقس الاتصال بالخادم"}
+              </p>
+              <p className="text-cream/70 text-xs font-mono leading-relaxed">
+                {error}
+              </p>
+            </motion.div>
+          ) : filteredItems.length === 0 ? (
+            <motion.div
+              key="empty"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -134,6 +230,7 @@ export default function MenuPage({
             </motion.div>
           ) : (
             <motion.div
+              key="grid"
               layout
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >

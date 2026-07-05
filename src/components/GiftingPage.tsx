@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Gift, Send, CheckCircle, Mail, DollarSign, Award, Landmark, AlertCircle } from 'lucide-react';
+import { Sparkles, Gift, Send, CheckCircle, Mail, DollarSign, Award, Landmark, AlertCircle, Loader } from 'lucide-react';
 import { Language, GiftCardConfig, CorporateInquiry } from '../types';
 import { TRANSLATIONS } from '../data';
+import { supabase } from '../lib/supabase';
 
 interface GiftingPageProps {
   currentLang: Language;
@@ -35,6 +36,8 @@ export default function GiftingPage({ currentLang, onAddToCart }: GiftingPagePro
     notes: ''
   });
   const [inquirySubmitted, setInquirySubmitted] = useState(false);
+  const [corporateLoading, setCorporateLoading] = useState(false);
+  const [corporateError, setCorporateError] = useState<string | null>(null);
 
   const t = (key: string) => TRANSLATIONS[key]?.[currentLang] || key;
 
@@ -75,10 +78,37 @@ export default function GiftingPage({ currentLang, onAddToCart }: GiftingPagePro
     }, 3000);
   };
 
-  const handleCorporateSubmit = (e: React.FormEvent) => {
+  const handleCorporateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setInquirySubmitted(true);
-    setTimeout(() => {
+    setCorporateLoading(true);
+    setCorporateError(null);
+
+    try {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+      const isPlaceholder = !supabaseUrl || supabaseUrl.includes('your_supabase_project_url_here');
+
+      if (isPlaceholder) {
+        throw new Error('Supabase project URL is not configured.');
+      }
+
+      const { error: insertErr } = await supabase
+        .from('corporate_inquiries')
+        .insert([{
+          name: inquiry.name,
+          company_name: inquiry.companyName,
+          email: inquiry.email,
+          phone: inquiry.phone,
+          event_type: inquiry.eventType,
+          guests_count: Number(inquiry.guestsCount),
+          event_date: inquiry.eventDate,
+          notes: inquiry.notes
+        }]);
+
+      if (insertErr) {
+        throw insertErr;
+      }
+
+      setInquirySubmitted(true);
       setInquiry({
         name: '',
         companyName: '',
@@ -89,7 +119,19 @@ export default function GiftingPage({ currentLang, onAddToCart }: GiftingPagePro
         eventDate: '',
         notes: ''
       });
-    }, 4000);
+      setTimeout(() => {
+        setInquirySubmitted(false);
+      }, 5000);
+    } catch (err: any) {
+      console.error('Error submitting corporate inquiry:', err);
+      setCorporateError(
+        currentLang === 'en'
+          ? `Could not submit inquiry: ${err.message || 'Network error'}`
+          : `فشل تقديم طلب الفعالية: ${err.message || 'خطأ في الشبكة'}`
+      );
+    } finally {
+      setCorporateLoading(false);
+    }
   };
 
   const handleAmountSelect = (val: number) => {
@@ -519,11 +561,24 @@ export default function GiftingPage({ currentLang, onAddToCart }: GiftingPagePro
                     />
                   </div>
 
+                  {corporateError && (
+                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl flex items-start gap-3 text-xs">
+                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                      <span>{corporateError}</span>
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full py-3 bg-wine border border-gold/30 hover:border-gold hover:bg-gold hover:text-espresso font-bold uppercase tracking-wider text-xs rounded-lg transition-luxury shadow cursor-pointer"
+                    disabled={corporateLoading}
+                    className="w-full py-3 bg-wine border border-gold/30 hover:border-gold hover:bg-gold hover:text-espresso disabled:bg-wine/40 disabled:border-gold/10 font-bold uppercase tracking-wider text-xs rounded-lg transition-luxury shadow cursor-pointer flex items-center justify-center gap-2"
                   >
-                    {t('btnSubmitInquiry')}
+                    {corporateLoading ? (
+                      <Loader className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Send className="w-3.5 h-3.5" />
+                    )}
+                    <span>{t('btnSubmitInquiry')}</span>
                   </button>
 
                 </form>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, HelpCircle, ChevronDown, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, HelpCircle, ChevronDown, MessageSquare, Loader, AlertCircle } from 'lucide-react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data';
+import { supabase } from '../lib/supabase';
 
 interface ContactPageProps {
   currentLang: Language;
@@ -11,6 +12,8 @@ export default function ContactPage({ currentLang }: ContactPageProps) {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const t = (key: string) => TRANSLATIONS[key]?.[currentLang] || key;
 
@@ -38,13 +41,47 @@ export default function ContactPage({ currentLang }: ContactPageProps) {
     }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+      const isPlaceholder = !supabaseUrl || supabaseUrl.includes('your_supabase_project_url_here');
+
+      if (isPlaceholder) {
+        throw new Error('Supabase project URL is not configured.');
+      }
+
+      const { error: insertErr } = await supabase
+        .from('contact_messages')
+        .insert([{
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
+        }]);
+
+      if (insertErr) {
+        throw insertErr;
+      }
+
+      setFormSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 4000);
+      setTimeout(() => {
+        setFormSubmitted(false);
+      }, 5000);
+    } catch (err: any) {
+      console.error('Error submitting contact message:', err);
+      setError(
+        currentLang === 'en'
+          ? `Could not transmit message: ${err.message || 'Network error'}`
+          : `فشل إرسال الرسالة: ${err.message || 'خطأ في الشبكة'}`
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -141,11 +178,23 @@ export default function ContactPage({ currentLang }: ContactPageProps) {
                   />
                 </div>
 
+                {error && (
+                  <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl flex items-start gap-3 text-xs">
+                    <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                    <span>{error}</span>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full py-3 bg-gold hover:bg-gold/90 text-espresso font-bold uppercase tracking-wider text-xs rounded-lg flex items-center justify-center gap-2 transition-luxury shadow-lg cursor-pointer"
+                  disabled={loading}
+                  className="w-full py-3 bg-gold hover:bg-gold/90 disabled:bg-gold/50 text-espresso font-bold uppercase tracking-wider text-xs rounded-lg flex items-center justify-center gap-2 transition-luxury shadow-lg cursor-pointer"
                 >
-                  <Send className="w-3.5 h-3.5" />
+                  {loading ? (
+                    <Loader className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Send className="w-3.5 h-3.5" />
+                  )}
                   <span>{currentLang === 'en' ? "Transmit Message" : "أرسل الرسالة الآن"}</span>
                 </button>
 
