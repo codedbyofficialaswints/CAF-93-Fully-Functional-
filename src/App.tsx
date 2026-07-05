@@ -21,9 +21,11 @@ import { TRANSLATIONS } from './data';
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('en');
   const [activeTab, setActiveTab] = useState<string>(() => {
+    const cleanPath = window.location.pathname.replace(/\/$/, '');
     if (
-      window.location.pathname === '/admin' || 
+      cleanPath === '/admin' || 
       window.location.hash === '#/admin' || 
+      window.location.hash === '#admin' ||
       window.location.search.includes('admin=true')
     ) {
       return 'admin';
@@ -36,12 +38,18 @@ export default function App() {
   // Sync URL changes for back-office admin
   useEffect(() => {
     const handleUrlChange = () => {
+      const cleanPath = window.location.pathname.replace(/\/$/, '');
       if (
-        window.location.pathname === '/admin' || 
+        cleanPath === '/admin' || 
         window.location.hash === '#/admin' || 
+        window.location.hash === '#admin' ||
         window.location.search.includes('admin=true')
       ) {
         setActiveTab('admin');
+      } else {
+        if (cleanPath === '' || cleanPath === '/') {
+          setActiveTab('home');
+        }
       }
     };
     window.addEventListener('popstate', handleUrlChange);
@@ -51,6 +59,14 @@ export default function App() {
       window.removeEventListener('hashchange', handleUrlChange);
     };
   }, []);
+
+  // Programmatically update browser address bar when activeTab changes
+  useEffect(() => {
+    const cleanPath = window.location.pathname.replace(/\/$/, '');
+    if (activeTab === 'admin' && cleanPath !== '/admin') {
+      window.history.pushState({}, '', '/admin');
+    }
+  }, [activeTab]);
 
   // Fetch dynamic hours from Supabase settings table if configured
   useEffect(() => {
@@ -149,9 +165,10 @@ export default function App() {
         <AdminDashboard 
           currentLang={currentLang} 
           onBackToSite={() => {
-            if (window.location.pathname === '/admin') {
+            const cleanPath = window.location.pathname.replace(/\/$/, '');
+            if (cleanPath === '/admin') {
               window.history.replaceState({}, '', '/');
-            } else if (window.location.hash === '#/admin') {
+            } else if (window.location.hash === '#/admin' || window.location.hash === '#admin') {
               window.location.hash = '';
             } else if (window.location.search.includes('admin=true')) {
               window.history.replaceState({}, '', '/');
