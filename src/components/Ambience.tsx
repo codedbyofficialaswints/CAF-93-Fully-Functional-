@@ -29,7 +29,7 @@ export default function Ambience({ currentLang }: AmbienceProps) {
       },
       x: '70%',
       y: '30%',
-      image: "https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=60&w=500"
+      image: "https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=80&w=800"
     },
     {
       id: 'spot-2',
@@ -45,7 +45,7 @@ export default function Ambience({ currentLang }: AmbienceProps) {
       },
       x: '35%',
       y: '65%',
-      image: "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&q=60&w=500"
+      image: "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&q=80&w=800"
     },
     {
       id: 'spot-3',
@@ -61,7 +61,7 @@ export default function Ambience({ currentLang }: AmbienceProps) {
       },
       x: '55%',
       y: '50%',
-      image: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=60&w=500"
+      image: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800"
     },
     {
       id: 'spot-4',
@@ -77,7 +77,7 @@ export default function Ambience({ currentLang }: AmbienceProps) {
       },
       x: '20%',
       y: '45%',
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=60&w=500"
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800"
     }
   ];
 
@@ -108,7 +108,7 @@ export default function Ambience({ currentLang }: AmbienceProps) {
           {/* Left Block: Interactive Map / Spatial Walkthrough Visual */}
           <div className="lg:col-span-7 bg-[#1A1210]/60 border border-gold/15 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden h-[400px] sm:h-[500px]">
             {/* Visual background symbolizing our boutique lounge space floorplan or abstract perspective layout */}
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=60&w=800')] bg-cover bg-center opacity-25 group filter saturate-[0.8] contrast-[1.1]" />
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200')] bg-cover bg-center opacity-25 group filter saturate-[0.8] contrast-[1.1]" />
             <div className="absolute inset-0 bg-gradient-to-tr from-dark-red/90 via-wine/60 to-dark-red/90 mix-blend-multiply" />
             
             {/* Helpful legend */}
@@ -221,8 +221,6 @@ export default function Ambience({ currentLang }: AmbienceProps) {
                     src={currentSpot.image} 
                     alt={currentSpot.title[currentLang]} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-dark-red/20 mix-blend-multiply" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1a1210] to-transparent" />

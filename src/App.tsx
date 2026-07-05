@@ -12,7 +12,6 @@ import AboutPage from './components/AboutPage';
 import SpacePage from './components/SpacePage';
 import GiftingPage from './components/GiftingPage';
 import ContactPage from './components/ContactPage';
-import ReservationsPage from './components/ReservationsPage';
 import CartDrawer from './components/CartDrawer';
 
 export default function App() {
@@ -146,14 +145,6 @@ export default function App() {
             <GiftingPage 
               currentLang={currentLang}
               onAddToCart={handleAddToOrder}
-            />
-          </div>
-        )}
-
-        {activeTab === 'reserve' && (
-          <div className="animate-fade-in">
-            <ReservationsPage
-              currentLang={currentLang}
             />
           </div>
         )}

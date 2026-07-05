@@ -55,7 +55,7 @@ export default function GiftingPage({ currentLang, onAddToCart }: GiftingPagePro
       },
       price: finalAmount,
       category: 'gifting' as const,
-      image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&q=60&w=400"
+      image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&q=80&w=600"
     };
 
     onAddToCart(virtualItem);

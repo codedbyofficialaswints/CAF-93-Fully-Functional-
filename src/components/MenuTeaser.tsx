@@ -87,8 +87,6 @@ export default function MenuTeaser({
                         src={item.image}
                         alt={item.name[currentLang]}
                         className="w-full h-full object-cover saturate-[1.1] contrast-[1.05]"
-                        loading="lazy"
-                        referrerPolicy="no-referrer"
                       />
                       <div className="absolute inset-0 bg-dark-red/10 group-hover:bg-transparent transition-colors duration-500" />
                     </div>

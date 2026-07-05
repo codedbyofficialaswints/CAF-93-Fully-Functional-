@@ -10,34 +10,7 @@ export const TRANSLATIONS: TranslationSet = {
   navSpace: { en: "Space & Drive-thru", ar: "المساحة والدرايف ثرو" },
   navGifting: { en: "Gifting", ar: "الإهداء" },
   navContact: { en: "Contact", ar: "اتصل بنا" },
-  navReserve: { en: "Reserve a Table", ar: "احجز طاولة" },
   btnOrderNow: { en: "Order Now", ar: "اطلب الآن" },
-
-  // Reservations Page
-  reservationsTitle: { en: "Reserve Your Table", ar: "احجز طاولتك" },
-  reservationsSubtitle: {
-    en: "Secure your spot in the lounge, the workspace corner, or under the open sky — in seconds.",
-    ar: "احجز مكانك في الصالة، ركن العمل، أو الجلسة الخارجية في ثوانٍ معدودة."
-  },
-  reservationsFormHeader: { en: "Booking Details", ar: "تفاصيل الحجز" },
-  formReserveDate: { en: "Select Date", ar: "اختر التاريخ" },
-  formReserveTime: { en: "Select Time", ar: "اختر الوقت" },
-  formPartySize: { en: "Party Size", ar: "عدد الأشخاص" },
-  formSeating: { en: "Seating Preference", ar: "تفضيل الجلسة" },
-  seatLounge: { en: "Lounge", ar: "الصالة" },
-  seatWorkspace: { en: "Workspace Corner", ar: "ركن العمل" },
-  seatOutdoor: { en: "Outdoor", ar: "خارجية" },
-  formOccasion: { en: "Occasion", ar: "المناسبة" },
-  occasionNone: { en: "Just Visiting", ar: "زيارة عادية" },
-  occasionBirthday: { en: "Birthday", ar: "عيد ميلاد" },
-  occasionMeeting: { en: "Business Meeting", ar: "اجتماع عمل" },
-  occasionAnniversary: { en: "Anniversary", ar: "ذكرى سنوية" },
-  btnConfirmReservation: { en: "Confirm Reservation", ar: "تأكيد الحجز" },
-  reservationSuccess: { en: "Table Reserved!", ar: "تم حجز طاولتك!" },
-  reservationSuccessSub: {
-    en: "We've saved your table. Show your reference code at the host stand when you arrive.",
-    ar: "تم حجز طاولتك بنجاح. يرجى إظهار رقم الحجز عند وصولك."
-  },
 
   // Hero Section
   heroTitle: { en: "The Elixir of Happiness", ar: "إكسير السعادة" },
@@ -153,7 +126,7 @@ export const STORYTELLING_STEPS = [
       en: "Coffee beans harvested at altitudes above 1,500m develop slower, concentrating natural sugars and rich density.",
       ar: "حبوب البن التي تنمو على ارتفاعات تفوق ١,٥٠٠ متر تنضج ببطء أشد، مما يركز السكريات الطبيعية والصلابة الاستثنائية."
     },
-    media: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=60&w=500"
+    media: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=800"
   },
   {
     id: 'roasting',
@@ -167,7 +140,7 @@ export const STORYTELLING_STEPS = [
       en: "Our custom roast curves minimize chlorogenic acid degradation while amplifying natural aromatic complexity.",
       ar: "منحنيات التحميص المخصصة لدينا تقلل من تفكك الأحماض الطبيعية المفيدة مع مضاعفة التعقيد العطري والعمق الحسي."
     },
-    media: "https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?auto=format&fit=crop&q=60&w=500"
+    media: "https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?auto=format&fit=crop&q=80&w=800"
   },
   {
     id: 'grinding',
@@ -181,7 +154,7 @@ export const STORYTELLING_STEPS = [
       en: "A deviation of just 20 microns in grind size can shift extraction sweet-spot into bitter over-extraction.",
       ar: "انحراف قدره ٢٠ ميكرون فقط في مقاس الطحنة كفيل بنقل القهوة من الاستخلاص المثالي إلى المرارة الحادة."
     },
-    media: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=60&w=500"
+    media: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=80&w=800"
   },
   {
     id: 'extraction',
@@ -195,7 +168,7 @@ export const STORYTELLING_STEPS = [
       en: "At 93°C, the water-solubility coefficient perfectly balances lipid extraction with citric and malic acidity.",
       ar: "عند حرارة ٩٣ درجة مئوية، يتوازن معامل ذوبان الماء تماماً ليستخلص الزيوت المفيدة والأحماض الفاكهية المتزنة."
     },
-    media: "https://images.unsplash.com/photo-151097252790b-af4f42d910ae?auto=format&fit=crop&q=60&w=500"
+    media: "https://images.unsplash.com/photo-151097252790b-af4f42d910ae?auto=format&fit=crop&q=80&w=800"
   }
 ];
 
@@ -238,7 +211,7 @@ export const MENU_ITEMS: MenuItem[] = [
     poeticDesc: { en: "A golden-hued espresso ritual celebrating local Omani hospitality and modern craft.", ar: "طقوس إسبريسو ذهبية تحتفي بكرم الضيافة العمانية الأصيلة بلمسة عصرية." },
     price: 2.600,
     category: "hot",
-    image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&q=60&w=400",
+    image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&q=80&w=600",
     dietary: ["gluten-free"]
   },
   {
@@ -248,7 +221,7 @@ export const MENU_ITEMS: MenuItem[] = [
     poeticDesc: { en: "Intense, velvety, and balanced, highlighting the rich chocolate terroir of Colombian beans.", ar: "مكثف، مخملي ومتوازن، يبرز نوتات الكاكاو الغنية في حبوب البن الكولومبية." },
     price: 1.800,
     category: "hot",
-    image: "https://images.unsplash.com/photo-1570968915860-54d5c301fc9f?auto=format&fit=crop&q=60&w=400"
+    image: "https://images.unsplash.com/photo-1570968915860-54d5c301fc9f?auto=format&fit=crop&q=80&w=600"
   },
   {
     id: "m-3",
@@ -257,7 +230,7 @@ export const MENU_ITEMS: MenuItem[] = [
     poeticDesc: { en: "A comforting blend of rich, dark espresso balanced by velvety vanilla-like sweetness.", ar: "مزيج دافئ مريح من الإسبريسو الداكن تتوازنه حلاوة الحليب الفانيلي المخملي." },
     price: 2.300,
     category: "hot",
-    image: "https://images.unsplash.com/photo-1594911774802-8822a7079af1?auto=format&fit=crop&q=60&w=400"
+    image: "https://images.unsplash.com/photo-1594911774802-8822a7079af1?auto=format&fit=crop&q=80&w=600"
   },
   {
     id: "m-4",
@@ -266,7 +239,7 @@ export const MENU_ITEMS: MenuItem[] = [
     poeticDesc: { en: "A clean, tea-like body served in hand-fired Omani style clay pottery for earthy connection.", ar: "قوام نقي يشبه الشاي يقدم في أكواب فخارية تحاكي التراب العماني للأصالة." },
     price: 2.500,
     category: "hot",
-    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=60&w=400"
+    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600"
   },
 
   // Cold Drinks
@@ -277,7 +250,7 @@ export const MENU_ITEMS: MenuItem[] = [
     poeticDesc: { en: "Crisp and highly stimulating, poured over clear crystal ice sphere.", ar: "نقي ومنبه للغاية، يسكب على كرة ثلج كريستالية مصفاة للحفاظ على تركيز النكهة." },
     price: 2.700,
     category: "cold",
-    image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=60&w=400"
+    image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=600"
   },
   {
     id: "m-6",
@@ -286,10 +259,65 @@ export const MENU_ITEMS: MenuItem[] = [
     poeticDesc: { en: "Vibrant ruby-red floral infusion that rehydrates the senses instantly in afternoon warmth.", ar: "مزيج زهري أحمر ياقوتي منعش يعيد ترطيب الحواس فوراً في وهج ظهيرة بركاء." },
     price: 2.200,
     category: "cold",
-    image: "https://images.unsplash.com/photo-1497515114629-f71d768fd07c?auto=format&fit=crop&q=60&w=400",
+    image: "https://images.unsplash.com/photo-1497515114629-f71d768fd07c?auto=format&fit=crop&q=80&w=600",
     dietary: ["vegan", "gluten-free"]
   },
   {
     id: "m-7",
     name: { en: "Iced Spanish Latte", ar: "سبانش لاتيه بارد" },
-    description: { en: "Double shot espresso poured over chilled sweet milk and handcrafted ice cubes.", ar: 
+    description: { en: "Double shot espresso poured over chilled sweet milk and handcrafted ice cubes.", ar: "إسبريسو مزدوج يسكب على حليب بارد محلى ومكعبات ثلج مصفاة يدوياً." },
+    poeticDesc: { en: "A perfect companion for Barka's drives, sweet, stimulating, and incredibly smooth.", ar: "رفيق مثالي لمشاوير بركاء السريعة، حلو المذاق، منعش وسلس للغاية." },
+    price: 2.400,
+    category: "cold",
+    image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&q=80&w=600"
+  },
+
+  // Desserts
+  {
+    id: "m-8",
+    name: { en: "Lavender Romance Cake", ar: "كعكة لافندر ٩٣" },
+    description: { en: "Elegant layer cake infused with natural organic lavender floral notes and rich cream.", ar: "كيك بطبقات مخملية منقوعة بنكهة زهر اللافندر العضوي وحلاوة هادئة بقوام غني." },
+    poeticDesc: { en: "A visually stunning lilac dessert served on our wide unglazed ceramic flat plate.", ar: "حلوى مذهلة بلون اللافندر تقدم في طبق سيراميكي مسطح مصنوع يدوياً." },
+    price: 2.800,
+    category: "desserts",
+    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: "m-9",
+    name: { en: "Luxury Snickers Cake", ar: "كيك السنيكرز الفاخر" },
+    description: { en: "Decadent sponge cake layered with homemade salted caramel, roasted peanuts, and milk chocolate.", ar: "كيك بطبقات من الكراميل المملح، الفول السوداني المقرمش، والشوكولاتة البلجيكية." },
+    poeticDesc: { en: "A powerful combination of sweet, salty, and crunchy that pairs perfectly with black V60.", ar: "مزيج غني من الحلاوة والملوحة والقرمشة يتناغم بجمال مع قهوة V60 السوداء." },
+    price: 2.900,
+    category: "desserts",
+    image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: "m-10",
+    name: { en: "Saffron Rose Milk Cake", ar: "كعكة الحليب بالزعفران والورد" },
+    description: { en: "Classic sponge cake soaked in premium saffron-rose infused triple-milk sauce.", ar: "كيكة اسفنجية مشبعة بصلصة الحليب الثلاثي المنقوع بالزعفران الفاخر وماء الورد." },
+    poeticDesc: { en: "Fragrant and meltingly soft, this is Omani sweet ritual condensed into a modern luxury plate.", ar: "عطرية وتذوب في الفم نعومة، طقس حلو عماني يتجسد في طبق عصري فاخر." },
+    price: 3.100,
+    category: "desserts",
+    image: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&q=80&w=600"
+  },
+
+  // Gifting
+  {
+    id: "m-11",
+    name: { en: "Artisanal Coffee & Stoneware Box", ar: "صندوق الإهداء الفخاري والبن" },
+    description: { en: "A luxury rigid gift box containing 250g single-origin beans and 2 hand-thrown stoneware cups.", ar: "صندوق هدايا فاخر يحتوي على ٢٥٠ غرام بن أحادي المصدر وكوبين سيراميك مصنوعين يدوياً بشعار كافيه ٩٣." },
+    poeticDesc: { en: "Give the gift of tactile ritual. The cups carry the true physical weight of Omani hospitality.", ar: "أهدِ طقوساً ملموسة بالحب. تحمل الأكواب الفخارية الوزن الحقيقي لكرم الضيافة العمانية." },
+    price: 15.000,
+    category: "gifting",
+    image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    id: "m-12",
+    name: { en: "The 93° Coffee Experience Box", ar: "صندوق تجربة المقطرات الكامل" },
+    description: { en: "Includes 3 select micro-lot bean bags and our custom gold-rimmed glass pour-over set.", ar: "يشمل ٣ محاصيل قهوة مختارة فاخرة مع طقم تقطير زجاجي ذو إطار ذهبي أنيق." },
+    poeticDesc: { en: "An absolute masterclass for coffee enthusiasts, elevating morning focus at home.", ar: "تجربة متكاملة لعشاق تقطير القهوة، لترقية مستويات التركيز الصباحية في المنزل." },
+    price: 24.000,
+    category: "gifting",
+    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600"
+  }
+];

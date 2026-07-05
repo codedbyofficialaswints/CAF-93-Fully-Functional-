@@ -54,11 +54,9 @@ export default function AboutPage({ currentLang }: AboutPageProps) {
 
           <div className="lg:col-span-5 h-[350px] sm:h-[450px] relative rounded-2xl overflow-hidden group shadow-2xl">
             <img 
-              src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=60&w=600" 
+              src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" 
               alt="Barista brewing latte art, CAFÉ93 stoneware cup" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-dark-red/20 mix-blend-multiply" />
             <div className="absolute inset-0 bg-wine/15 mix-blend-color" />
@@ -111,7 +109,6 @@ export default function AboutPage({ currentLang }: AboutPageProps) {
               alt="Café 93 Brand Identity Mockup" 
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
               referrerPolicy="no-referrer"
-              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark-red/50 via-transparent to-transparent pointer-events-none" />
           </div>
@@ -121,11 +118,9 @@ export default function AboutPage({ currentLang }: AboutPageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20">
           <div className="lg:col-span-5 h-[350px] sm:h-[450px] relative rounded-2xl overflow-hidden group shadow-2xl order-last lg:order-first">
             <img 
-              src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=60&w=600" 
+              src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=80&w=800" 
               alt="Artisanal raw coffee beans sourcing" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-dark-red/25 mix-blend-multiply" />
             <div className="absolute bottom-6 left-6 right-6 bg-dark-red/90 border border-gold/20 p-4 rounded-lg">

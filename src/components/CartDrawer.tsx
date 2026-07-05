@@ -197,8 +197,6 @@ export default function CartDrawer({
                             src={item.image} 
                             alt={item.name[currentLang]} 
                             className="w-full h-full object-cover saturate-[1.1]"
-                            loading="lazy"
-                            referrerPolicy="no-referrer"
                           />
                         </div>
 
