@@ -423,4 +423,4 @@ export default function ReservationsPage({ currentLang }: ReservationsPageProps)
                   <Laptop className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                   <span>
                     {currentLang === 'en'
-                      ? 'Workspace-corner tables include power out
+                      ? 'Workspace-corner tables include power out? 'Workspace-corner tables include power outlets and fiber WiFi.'
